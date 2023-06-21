@@ -1,0 +1,11 @@
+.vscode/*.json
+
+Debug
+cmsis
+drivers/inc
+drivers/src
+settings
+sensor-TH08.dep
+sensor-TH08.ewd
+sensor-TH08.ewp
+sensor-TH08.ewt
