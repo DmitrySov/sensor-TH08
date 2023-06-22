@@ -20,6 +20,7 @@
 #include "at32f403a_407_clock.h"
 
 #include "at32f403a_407_int.h"
+#include "i2c_application_library/i2c_application.h"
 
 #include "board.h"
 #include "SSD_1309.h"
