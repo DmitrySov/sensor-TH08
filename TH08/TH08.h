@@ -1,49 +1,27 @@
 /*H**************************************************************************
-* Õ¿«¬¿Õ»≈:         main.h        
+* ????????:         i2c.h        
 *----------------------------------------------------------------------------
 * Copyright (c) 2023
 *----------------------------------------------------------------------------
 * RELEASE:
 * REVISION:
 *----------------------------------------------------------------------------
-* Œœ»—¿Õ»≈:
+* ????????:
 *****************************************************************************/
 
-#ifndef _MAIN_H_
-#define _MAIN_H_
+#ifndef _TH08_H_
+#define _TH08_H_
 
 /*_____ I N C L U D E S ____________________________________________________*/
-#include <stdio.h>
-#include <string.h>
-#include "stdbool.h"
-#include "stdint.h"
-#include "at32f403a_407_clock.h"
 
-#include "at32f403a_407_int.h"
-#include "i2c_application_library/i2c_application.h"
-
-#include "board.h"
-#include "SSD_1309.h"
-#include "gpio.h"
-#include "i2c.h"
+#include "main.h"
 
 /*_____ M A C R O S ________________________________________________________*/
 
-
 /*_____ D E F I N I T I O N ________________________________________________*/
+#define     SI7006_ADDRESS       0x40                                                
+#define     SI7006_MEASURE_RELATIVE_HUMIDITY_NO_HOLD_MASTER_MODE           0xF5               
+#define     SI7006_MEASURE_TEMPERATURE_NO_HOLD_MASTER_MODE                 0xF3  
 
 
-/*_____ D E C L A R A T I O N ______________________________________________*/
-
-
-
-/**********************************
- * @brief
- * @param 
- * @return
-*************************************/
-
-
-
-
-#endif	//_MAIN_H_
+#endif	//_TH08_H
