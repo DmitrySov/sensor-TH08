@@ -28,17 +28,17 @@
 /**
   * @brief  system clock config program
   * @note   the system clock is configured as follow:
-  *         - system clock        = hext * pll_mult
+  *         - system clock        = hext / 2 * pll_mult
   *         - system clock source = pll (hext)
   *         - hext                = 8000000
-  *         - sclk                = 224000000
+  *         - sclk                = 240000000
   *         - ahbdiv              = 1
-  *         - ahbclk              = 224000000
-  *         - apb1div             = 2
-  *         - apb1clk             = 112000000
+  *         - ahbclk              = 240000000
   *         - apb2div             = 2
-  *         - apb2clk             = 112000000
-  *         - pll_mult            = 28
+  *         - apb2clk             = 120000000
+  *         - apb1div             = 2
+  *         - apb1clk             = 120000000
+  *         - pll_mult            = 60
   *         - pll_range           = GT72MHZ (greater than 72 mhz)
   * @param  none
   * @retval none
@@ -48,7 +48,6 @@ void system_clock_config(void)
   /* reset crm */
   crm_reset();
 
-  /* enable hext */
   crm_clock_source_enable(CRM_CLOCK_SOURCE_HEXT, TRUE);
 
    /* wait till hext is ready */
@@ -57,7 +56,10 @@ void system_clock_config(void)
   }
 
   /* config pll clock resource */
-  crm_pll_config(CRM_PLL_SOURCE_HEXT, CRM_PLL_MULT_28, CRM_PLL_OUTPUT_RANGE_GT72MHZ);
+  crm_pll_config(CRM_PLL_SOURCE_HEXT_DIV, CRM_PLL_MULT_60, CRM_PLL_OUTPUT_RANGE_GT72MHZ);
+
+  /* config hext division */
+  crm_hext_clock_div_set(CRM_HEXT_DIV_2);
 
   /* enable pll */
   crm_clock_source_enable(CRM_CLOCK_SOURCE_PLL, TRUE);
@@ -70,10 +72,10 @@ void system_clock_config(void)
   /* config ahbclk */
   crm_ahb_div_set(CRM_AHB_DIV_1);
 
-  /* config apb2clk */
+  /* config apb2clk, the maximum frequency of APB1/APB2 clock is 120 MHz */
   crm_apb2_div_set(CRM_APB2_DIV_2);
 
-  /* config apb1clk */
+  /* config apb1clk, the maximum frequency of APB1/APB2 clock is 120 MHz  */
   crm_apb1_div_set(CRM_APB1_DIV_2);
 
   /* enable auto step mode */

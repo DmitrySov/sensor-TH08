@@ -315,7 +315,6 @@ i2c_status_type i2c_master_write_addr(i2c_handle_type *hi2c, uint16_t address, u
     /* send slave address */
     i2c_data_send(hi2c->i2cx, (uint8_t)(address & 0x00FF));
   }
-
   /* wait for the addr7 flag to be set */
   if(i2c_wait_flag(hi2c, I2C_ADDR7F_FLAG, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
   {
@@ -370,7 +369,6 @@ i2c_status_type i2c_master_read_addr(i2c_handle_type *hi2c, uint16_t address, ui
 
     /* send slave address */
     i2c_data_send(hi2c->i2cx, (uint8_t)(address & 0x00FF));
-
     /* wait for the addr7 flag to be set */
     if(i2c_wait_flag(hi2c, I2C_ADDR7F_FLAG, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
     {
@@ -396,7 +394,6 @@ i2c_status_type i2c_master_read_addr(i2c_handle_type *hi2c, uint16_t address, ui
     /* send slave 10-bit address header */
     i2c_data_send(hi2c->i2cx, (uint8_t)((address & 0x0300) >> 7) | 0xF1);
   }
-
   /* wait for the addr7 flag to be set */
   if(i2c_wait_flag(hi2c, I2C_ADDR7F_FLAG, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
   {
@@ -461,7 +458,6 @@ i2c_status_type i2c_master_transmit(i2c_handle_type* hi2c, uint16_t address, uin
     i2c_data_send(hi2c->i2cx, (*pdata++));
     size--;
   }
-
   /* wait for the tdc flag to be set */
   if(i2c_wait_flag(hi2c, I2C_TDC_FLAG, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
   {

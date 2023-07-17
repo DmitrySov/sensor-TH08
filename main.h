@@ -18,14 +18,14 @@
 #include "stdbool.h"
 #include "stdint.h"
 #include "at32f403a_407_clock.h"
-
+#include "board.h"
 #include "at32f403a_407_int.h"
 #include "i2c_application_library/i2c_application.h"
 
-#include "board.h"
+
 #include "SSD_1309.h"
 #include "gpio.h"
-#include "i2c.h"
+#include "TH08.h"
 
 /*_____ M A C R O S ________________________________________________________*/
 

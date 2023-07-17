@@ -24,10 +24,24 @@
 /*_____ D E C L A R A T I O N ______________________________________________*/
 
 extern int cTemp;
-extern int ble_temp ;
 extern int humidity;
-extern int ble_hum ;
 
+i2c_handle_type hi2cx_th08;
+i2c_status_type i2c_status_th08;
+
+/**
+  * @brief  error handler program
+  * @param  i2c_status
+  * @retval none
+  */
+void error_handler(uint32_t error_code)
+{
+  while(1)
+  {
+   // at32_led_toggle(LED2);
+    delay_ms(500);
+  }
+}
 
 void tt_i2c_write(uint8_t slaveAddr, uint8_t regAddr)
 {
@@ -35,14 +49,22 @@ void tt_i2c_write(uint8_t slaveAddr, uint8_t regAddr)
 
 	buf[0] = regAddr;
 	//buf[1] = 0;
-	 ///i2c_write_dt(&dev_i2c, buf, sizeof(buf));
+	 /* start the request reception process */
+    if((i2c_status_th08 = i2c_master_transmit(&hi2cx_th08, slaveAddr, buf, 1, I2C_TIMEOUT)) != I2C_OK)
+    {
+      error_handler(i2c_status_th08);
+    }
 	return ;
 }
 
 uint8_t tt_i2c_read(uint8_t slaveAddr)
 {
 	uint8_t data;
-	//i2c_read_dt(&dev_i2c, &data, sizeof(data));
+	/* start the request reception process */
+    if((i2c_status_th08 = i2c_master_receive(&hi2cx_th08, slaveAddr, &data, BUF_SIZE, I2C_TIMEOUT)) != I2C_OK)
+    {
+      error_handler(i2c_status_th08);
+    }
 	return data;
 }
 
@@ -58,7 +80,7 @@ void MEASURE_RELATIVE_HUMIDITY_NO_HOLD_MASTER_MODE (void)
 	 		tt_i2c_write(SI7006_ADDRESS, SI7006_MEASURE_RELATIVE_HUMIDITY_NO_HOLD_MASTER_MODE);
 
 	 // for time delay
-        k_sleep(K_MSEC(1000));
+       // k_sleep(K_MSEC(1000));
 
 	 // Read 2 bytes of humidity data
 
@@ -90,10 +112,10 @@ void MEASURE_RELATIVE_HUMIDITY_NO_HOLD_MASTER_MODE (void)
 
 	 // Send temperature measurement command, NO HOLD MASTER(0xF3)
 
-	 		tt_i2c_write(SI7006_ADDRESS, SI7006_MEASURE_TEMPERATURE_NO_HOLD_MASTER_MODE);
+	tt_i2c_write(SI7006_ADDRESS, SI7006_MEASURE_TEMPERATURE_NO_HOLD_MASTER_MODE);
 
 	 // For time delay
-        k_sleep(K_MSEC(1000));
+        delay_ms(10);
 	 		
 	 // Read 2 bytes of temperature data
 
