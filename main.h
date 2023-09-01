@@ -25,7 +25,8 @@
 
 #include "SSD_1309.h"
 #include "gpio.h"
-#include "TH08.h"
+#include "i2c.h"
+#include "TH06.h"
 
 /*_____ M A C R O S ________________________________________________________*/
 

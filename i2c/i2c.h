@@ -9,8 +9,8 @@
 * ????????:
 *****************************************************************************/
 
-#ifndef _TH08_H_
-#define _TH08_H_
+#ifndef _I2C_H_
+#define _I2C_H_
 
 /*_____ I N C L U D E S ____________________________________________________*/
 
@@ -38,15 +38,8 @@
 
 #define BUF_SIZE                         8
 /*******************************/
-#define     SI7006_ADDRESS       0x40                                                
-#define     SI7006_MEASURE_RELATIVE_HUMIDITY_NO_HOLD_MASTER_MODE           0xF5               
-#define     SI7006_MEASURE_TEMPERATURE_NO_HOLD_MASTER_MODE                 0xF3  
-
+void i2c_lowlevel_init(i2c_handle_type* hi2c);
+unsigned char i2c_send_request(unsigned char address);
 void error_handler(uint32_t error_code);
-void tt_i2c_write(uint8_t slaveAddr, uint8_t regAddr);
-uint8_t tt_i2c_read(uint8_t slaveAddr);
-void MEASURE_RELATIVE_HUMIDITY_NO_HOLD_MASTER_MODE (void);
-void MEASURE_TEMPERATURE_NO_HOLD_MASTER_MODE (void);
-void si7006(void);
 
-#endif	//_TH08_H
+#endif	//_i2c_h
